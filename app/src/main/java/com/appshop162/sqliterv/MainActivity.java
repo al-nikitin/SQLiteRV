@@ -2,6 +2,7 @@ package com.appshop162.sqliterv;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,13 +28,12 @@ public class MainActivity extends AppCompatActivity {
         elements = dbAdapter.getAllListElements();
         dbAdapter.close();
 
-        for (ListElement element : elements) System.out.println(element.id);
-
-        adapter = new ListElementAdapter(this, elements, dbAdapter);
         RecyclerView rv = (RecyclerView) findViewById(R.id.list);
+        adapter = new ListElementAdapter(this, elements, dbAdapter);
         rv.setAdapter(adapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(layoutManager);
         registerForContextMenu(rv);
-        // TODO -> ViewHolder
 
     }
 
@@ -47,12 +47,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_add) {
             ListElement listElement = new ListElement();
-            elements.add(0, listElement);
             dbAdapter.open();
-            dbAdapter.createListElement(listElement);
+            listElement = dbAdapter.createListElement();
             dbAdapter.close();
+            adapter.add(listElement);
+            adapter.notifyDataSetChanged();
         }
-        adapter.notifyDataSetChanged();
         return false;
     }
 }

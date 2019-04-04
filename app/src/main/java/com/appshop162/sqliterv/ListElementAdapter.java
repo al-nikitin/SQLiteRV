@@ -46,7 +46,7 @@ public class ListElementAdapter extends RecyclerView.Adapter<ListElementAdapter.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new ViewHolder(inflater.inflate(R.layout.list_element, viewGroup));
+        return new ViewHolder(inflater.inflate(R.layout.list_element, viewGroup, false));
     }
 
     @Override
@@ -82,5 +82,11 @@ public class ListElementAdapter extends RecyclerView.Adapter<ListElementAdapter.
     @Override
     public int getItemCount() {
         return elements.size();
+    }
+
+    public void add(ListElement element) {
+        elements.add(0, element);
+        //notifyItemInserted(0);
+        //notifyDataSetChanged();
     }
 }

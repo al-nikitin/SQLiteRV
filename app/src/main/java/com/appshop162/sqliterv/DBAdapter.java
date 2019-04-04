@@ -41,7 +41,8 @@ public class DBAdapter {
         dbHelper.close();
     }
 
-    public void createListElement(ListElement listElement) {
+    public ListElement createListElement() {
+        ListElement listElement = new ListElement();
         ContentValues values = new ContentValues();
         values.put(COLUMN_COLOR, listElement.imageColor.name());
         values.put(COLUMN_TEXT, listElement.text);
@@ -50,6 +51,7 @@ public class DBAdapter {
         listElement.id = insertID;
         Cursor cursor = sqlDB.query(TABLE_NAME, allColumns, COLUMN_ID + " = " + insertID, null, null, null, null);
         cursor.close();
+        return listElement;
     }
 
     public void deleteListElement(long idToDelete) {
