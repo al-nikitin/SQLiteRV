@@ -1,4 +1,4 @@
-package com.appshop162.sqlite;
+package com.appshop162.sqliterv;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

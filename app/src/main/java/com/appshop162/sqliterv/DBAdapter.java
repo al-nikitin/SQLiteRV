@@ -1,4 +1,4 @@
-package com.appshop162.sqlite;
+package com.appshop162.sqliterv;
 
 import android.content.ContentValues;
 import android.content.Context;
